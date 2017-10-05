@@ -26,13 +26,19 @@ package com.videojs.providers{
         function get duration():Number;
 
         /**
-         * Appends the segment data in a ByteArray to the source buffer.
-         * @param  bytes the ByteArray of data to append.
+         * Should return a value that indicates the current seekable start, in seconds.
          */
         function get seekStart():Number;
 
+        /**
+         * Should return a value that indicates the current seekable end, in seconds.
+         */
         function get seekEnd():Number;
 
+        /**
+         * Appends the segment data in a ByteArray to the source buffer.
+         * @param  bytes the ByteArray of data to append.
+         */
         function appendBuffer(bytes:ByteArray):void;
 
         /**
