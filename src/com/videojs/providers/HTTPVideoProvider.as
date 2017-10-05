@@ -198,6 +198,14 @@ package com.videojs.providers{
             _ns.seek(time);
         }
 
+        public function get seekStart():Number{
+            return 0;
+        }
+
+        public function get seekEnd():Number{
+            return 0;
+        }
+
         public function discontinuity():void{
             appendBytesAction(NetStreamAppendBytesAction.RESET_BEGIN);
             FLV_HEADER.position = 0;

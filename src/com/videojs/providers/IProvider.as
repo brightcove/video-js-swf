@@ -29,6 +29,11 @@ package com.videojs.providers{
          * Appends the segment data in a ByteArray to the source buffer.
          * @param  bytes the ByteArray of data to append.
          */
+        function get seekStart():Number;
+
+        function get seekEnd():Number;
+
+
         function appendBuffer(bytes:ByteArray):void;
 
         /**

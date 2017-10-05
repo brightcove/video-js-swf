@@ -255,6 +255,28 @@ package com.videojs.providers{
         }
 
         /**
+         * Should return a value that indicates the current seekable start, in seconds.
+         */
+        public function get seekStart():Number {
+          if(_hls.type == HLSTypes.LIVE) {
+            return _hls.liveSlidingMain;
+          } else {
+            return 0;
+          }
+        }
+
+        /**
+         * Should return a value that indicates the current seekable end, in seconds.
+         */
+        public function get seekEnd():Number {
+          if(_hls.type == HLSTypes.VOD) {
+            return _duration;
+          } else { 
+            return _duration + _hls.liveSlidingMain;
+          }
+        }
+
+        /**
          * Appends the segment data in a ByteArray to the source buffer.
          * @param  bytes the ByteArray of data to append.
          */

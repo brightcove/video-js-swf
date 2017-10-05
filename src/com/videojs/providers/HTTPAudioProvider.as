@@ -134,6 +134,14 @@ package com.videojs.providers{
             return [];
         }
 
+        public function get seekStart():Number{
+            return 0;
+        }
+
+        public function get seekEnd():Number{
+            return 0;
+        }
+
         public function get bufferedBytesEnd():int{
             return _audioBytesLoaded;
         }

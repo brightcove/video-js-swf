@@ -134,6 +134,14 @@ package com.videojs.providers{
             }
         }
 
+        public function get seekStart():Number{
+            return 0;
+        }
+
+        public function get seekEnd():Number{
+            return 0;
+        }
+
         public function appendBuffer(bytes:ByteArray):void{
             throw "RTMPVideoProvider does not support appendBuffer";
         }
