@@ -33,7 +33,6 @@ package com.videojs.providers{
 
         function get seekEnd():Number;
 
-
         function appendBuffer(bytes:ByteArray):void;
 
         /**

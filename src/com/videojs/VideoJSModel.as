@@ -203,7 +203,6 @@ package com.videojs{
             }
         }
 
-
         public function get autoplay():Boolean{
             return _autoplay;
         }

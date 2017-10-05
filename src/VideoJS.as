@@ -85,7 +85,6 @@ package{
                 ExternalInterface.addCallback("vjs_resume", onResumeCalled);
                 ExternalInterface.addCallback("vjs_stop", onStopCalled);
 
-
                 // This callback should only be used when in data generation mode as it
                 // will adjust the notion of current time without notifiying the player
                 ExternalInterface.addCallback("vjs_adjustCurrentTime", onAdjustCurrentTimeCalled);
@@ -232,7 +231,6 @@ package{
         private function onDiscontinuityCalled():*{
             _app.model.discontinuity();
         }
-
 
         private function onGetPropertyCalled(pPropertyName:String = ""):*{
 
