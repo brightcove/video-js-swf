@@ -28,12 +28,12 @@ package com.videojs.providers{
         /**
          * Should return a value that indicates the current seekable start, in seconds.
          */
-        function get seekStart():Number;
+        function get seekableStart():Number;
 
         /**
          * Should return a value that indicates the current seekable end, in seconds.
          */
-        function get seekEnd():Number;
+        function get seekableEnd():Number;
 
         /**
          * Appends the segment data in a ByteArray to the source buffer.

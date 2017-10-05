@@ -134,11 +134,15 @@ package com.videojs.providers{
             }
         }
 
-        public function get seekStart():Number{
+        /** RTMPVideoProvider does not support seekableStart
+        */
+        public function get seekableStart():Number{
             return 0;
         }
 
-        public function get seekEnd():Number{
+        /** RTMPVideoProvider does not support seekableEnd
+        */
+        public function get seekableEnd():Number{
             return 0;
         }
 

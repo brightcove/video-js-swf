@@ -134,11 +134,15 @@ package com.videojs.providers{
             return [];
         }
 
-        public function get seekStart():Number{
+        /** HTTPAudioProvider does not support seekableStart
+        */
+        public function get seekableStart():Number{
             return 0;
         }
 
-        public function get seekEnd():Number{
+        /** HTTPAudioProvider does not support seekableEnd
+        */
+        public function get seekableEnd():Number{
             return 0;
         }
 

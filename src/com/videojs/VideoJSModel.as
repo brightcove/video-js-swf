@@ -183,16 +183,16 @@ package com.videojs{
             return 0;
         }
 
-        public function get seekStart():Number{
+        public function get seekableStart():Number{
             if(_provider){
-                return _provider.seekStart;
+                return _provider.seekableStart;
             }
             return 0;
         }
 
-        public function get seekEnd():Number{
+        public function get seekableEnd():Number{
             if(_provider){
-                return _provider.seekEnd;
+                return _provider.seekableEnd;
             }
             return 0;
         }

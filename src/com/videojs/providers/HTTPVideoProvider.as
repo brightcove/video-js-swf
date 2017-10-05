@@ -198,11 +198,15 @@ package com.videojs.providers{
             _ns.seek(time);
         }
 
-        public function get seekStart():Number{
+        /** HTTPVideoProvider does not support seekableStart
+        */
+        public function get seekableStart():Number{
             return 0;
         }
 
-        public function get seekEnd():Number{
+        /** HTTPVideoProvider does not support seekableEnd
+        */
+        public function get seekableEnd():Number{
             return 0;
         }
 

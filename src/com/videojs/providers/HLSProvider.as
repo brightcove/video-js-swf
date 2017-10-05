@@ -257,7 +257,7 @@ package com.videojs.providers{
         /**
          * Should return a value that indicates the current seekable start, in seconds.
          */
-        public function get seekStart():Number {
+        public function get seekableStart():Number {
           if(_hls.type == HLSTypes.LIVE) {
             return _hls.liveSlidingMain;
           } else {
@@ -268,7 +268,7 @@ package com.videojs.providers{
         /**
          * Should return a value that indicates the current seekable end, in seconds.
          */
-        public function get seekEnd():Number {
+        public function get seekableEnd():Number {
           if(_hls.type == HLSTypes.VOD) {
             return _duration;
           } else { 
