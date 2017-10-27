@@ -339,6 +339,12 @@ package{
                 case "autoLevelCapping":
                     return _app.model.autoLevelCapping;
                     break;
+                case "audioTracks":
+                    return _app.model.audioTracks;
+                    break;
+                case "audioTrack":
+                    return _app.model.audioTrack;
+                    break;
             }
             return null;
         }
@@ -400,6 +406,9 @@ package{
                     break;
                 case "autoLevelCapping":
                     _app.model.autoLevelCapping = int(pValue);
+                    break;
+                case "audioTrack":
+                    _app.model.audioTrack = int(pValue);
                     break;
                 default:
                     _app.model.broadcastErrorEventExternally(ExternalErrorEventName.PROPERTY_NOT_FOUND, pPropertyName);

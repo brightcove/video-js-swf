@@ -399,9 +399,11 @@ package com.videojs.providers{
         public function get numberOfLevels():int{
             return 1;
         }
+
         public function get level():int{
             return 0;
         }
+
         public function set level(pLevel:int):void
         {
             if (pLevel != 0)
@@ -409,6 +411,7 @@ package com.videojs.providers{
                 throw "Wrong level.";
             }
         }
+
         public function get autoLevelEnabled():Boolean
         {
             return false;
@@ -429,6 +432,21 @@ package com.videojs.providers{
         // not supported in this provider
         public function set autoLevelCapping(pLevel:int):void
         {
+            return;
+        }
+
+        // not supported in this provider
+        public function get audioTracks():Array {
+            return [];
+        }
+
+        // not supported in this provider
+        public function get audioTrack():int {
+            return -1;
+        }
+
+        // not supported in this provider
+        public function set audioTrack(pValue:int):void {
             return;
         }
 

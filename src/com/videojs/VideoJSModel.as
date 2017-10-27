@@ -184,14 +184,14 @@ package com.videojs{
         }
 
         public function get seekableStart():Number{
-            if(_provider){
+            if(_provider) {
                 return _provider.seekableStart;
             }
             return 0;
         }
 
         public function get seekableEnd():Number{
-            if(_provider){
+            if(_provider) {
                 return _provider.seekableEnd;
             }
             return 0;
@@ -201,6 +201,26 @@ package com.videojs{
             if(_provider && _provider is HTTPVideoProvider) {
                 (_provider as HTTPVideoProvider).duration = value;
             }
+        }
+
+        public function get audioTrack():int {
+            if(_provider) {
+                return _provider.audioTrack;
+            }
+            return -1;
+        }
+
+        public function set audioTrack(pValue:int):void {
+            if(_provider) {
+                _provider.audioTrack = pValue;
+            }
+        }
+
+        public function get audioTracks():Array {
+            if(_provider) {
+                return _provider.audioTracks;
+            }
+            return [];
         }
 
         public function get autoplay():Boolean{

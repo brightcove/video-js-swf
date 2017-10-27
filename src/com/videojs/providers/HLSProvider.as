@@ -21,6 +21,7 @@ package com.videojs.providers{
   import org.mangui.hls.utils.Log;
   import org.mangui.hls.utils.Params2Settings;
   import org.mangui.hls.model.Level;
+  import org.mangui.hls.model.AudioTrack;
 
   import by.blooddy.crypto.Base64;
 
@@ -275,6 +276,37 @@ package com.videojs.providers{
           } else {
             return _duration + _hls.liveSlidingMain;
           }
+        }
+
+       /**
+         * Should return the list of audio-tracks that this content has.
+         */
+        public function get audioTracks():Array {
+            var _audioTracks:Array = [];
+
+            for each(var _audioTrack:AudioTrack in _hls['audioTracks']) {
+              _audioTracks.push(_audioTrack);
+            }
+
+            return _audioTracks;
+        }
+
+       /**
+         * Should return index of the currently selected audio track
+         */
+        public function get audioTrack():int {
+            return _hls['audioTrack'];
+        }
+
+        /**
+          * Should select an audio track based on its is index in audio-track list
+          */
+        public function set audioTrack(pValue:int):void {
+            _hls['audioTrack'] = pValue;
+
+            if (!isNaN(_position) && pValue != -1) {
+                 _hls.stream.seek(_position);
+             }
         }
 
         /**

@@ -459,6 +459,21 @@ package com.videojs.providers{
             return;
         }
 
+        // not supported in this provider
+        public function get audioTracks():Array {
+            return [];
+        }
+
+        // not supported in this provider
+        public function get audioTrack():int {
+            return -1;
+        }
+
+        // not supported in this provider
+        public function set audioTrack(pValue:int):void {
+            return;
+        }
+
         private function initNetConnection():void{
             if(_nc == null){
                 _nc = new NetConnection();
