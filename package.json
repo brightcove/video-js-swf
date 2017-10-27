@@ -1,5 +1,5 @@
 {
-  "name": "videojs-flashls-swf",
+  "name": "@brightcove/videojs-flashls-swf",
   "description": "The Flash-fallback video player for video.js (http://videojs.com)",
   "version": "5.4.0",
   "copyright": "Copyright 2014 Brightcove, Inc. https://github.com/videojs/video-js-swf/blob/master/LICENSE",
