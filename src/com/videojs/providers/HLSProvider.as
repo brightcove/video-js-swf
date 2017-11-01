@@ -197,7 +197,7 @@ package com.videojs.providers{
             var bitrate:Number = _hls.levels[levelIndex].bitrate;
             var width:Number = _hls.levels[levelIndex].width;
             var height:Number = _hls.levels[levelIndex].height;
-            Log.info("HLSProvider: new level index " + levelIndex + " bitrate=" + bitrate + ", width=" + width + ", height=" + height);
+            Log.debug("HLSProvider: new level index " + levelIndex + " bitrate=" + bitrate + ", width=" + width + ", height=" + height);
             _model.broadcastEventExternally(ExternalEventName.ON_LEVEL_SWITCH, {levelIndex: levelIndex, bitrate: bitrate, width: width, height: height});
         }
 
@@ -226,7 +226,7 @@ package com.videojs.providers{
           {
             _mediaWidth = newWidth;
             _mediaHeight = newHeight;
-            Log.info("video size changed to ("+newWidth+","+newHeight+")");
+            Log.debug("video size changed to ("+newWidth+","+newHeight+")");
             _model.broadcastEvent(new VideoPlaybackEvent(VideoPlaybackEvent.ON_VIDEO_DIMENSION_UPDATE, {videoWidth: newWidth, videoHeight: newHeight}));
           }
         }
