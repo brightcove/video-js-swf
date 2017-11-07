@@ -266,5 +266,7 @@ package com.videojs.providers{
           * Should return the list of alt-audio-tracks that this content has.
           */
         function get altAudioTracks():Array;
+
+        function get stats():Object;
     }
 }

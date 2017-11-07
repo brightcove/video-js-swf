@@ -529,6 +529,11 @@ package com.videojs.providers{
             return;
         }
 
+        // not supported in this provider
+        public function get stats():Object {
+            return {};
+        }
+
         private function initNetConnection():void{
             // The video element triggers loadstart as soon as the resource selection algorithm selects a source
             // this is somewhat later than that moment but relatively close

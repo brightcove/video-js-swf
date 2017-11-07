@@ -348,6 +348,9 @@ package{
                 case "audioTrack":
                     return _app.model.audioTrack;
                     break;
+                case "stats":
+                    return _app.model.stats;
+                    break;
             }
             return null;
         }

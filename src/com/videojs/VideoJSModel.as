@@ -161,6 +161,13 @@ package com.videojs{
             return {};
         }
 
+        public function get stats(): Object{
+            if(_provider) {
+                return _provider.stats;
+            }
+            return {};
+        }
+
         public function get volume():Number{
             return _volume;
         }

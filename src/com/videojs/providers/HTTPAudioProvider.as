@@ -455,6 +455,11 @@ package com.videojs.providers{
             return;
         }
 
+        // not supported in this provider
+        public function get stats():Object {
+            return {};
+        }
+
         private function doLoadCalculations():void{
             // if the load is finished
             if(_sound.bytesLoaded == _sound.bytesTotal){

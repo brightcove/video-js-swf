@@ -479,6 +479,11 @@ package com.videojs.providers{
             return;
         }
 
+        // not supported in this provider
+        public function get stats():Object {
+            return {};
+        }
+
         private function initNetConnection():void{
             if(_nc == null){
                 _nc = new NetConnection();

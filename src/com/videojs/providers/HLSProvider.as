@@ -14,6 +14,7 @@ package com.videojs.providers{
 
   import org.mangui.hls.HLS;
   import org.mangui.hls.event.HLSEvent;
+  import org.mangui.hls.event.HLSError;
   import org.mangui.hls.constant.HLSTypes;
   import org.mangui.hls.HLSSettings;
   import org.mangui.hls.constant.HLSPlayStates;
@@ -55,6 +56,15 @@ package com.videojs.providers{
         private var _bufferedTime:Number = 0;
         private var _backBufferedTime:Number = 0;
 
+        private var _currentBandwidth:Number = 0;
+        private var _mediaRequests:Number = 0;
+        private var _mediaRequestsErrored:Number = 0;
+        private var _mediaRequestsTimedout:Number = 0;
+        private var _mediaRequestsAborted:Number = 0;
+        private var _mediaSecondsLoaded:Number = 0;
+        private var _mediaBytesTransferred:Number = 0;
+        private var _mediaTransferDuration:Number = 0;
+
         public function HLSProvider() {
           Log.info("https://github.com/brightcove/flashls");
           _hls = new HLS();
@@ -69,6 +79,8 @@ package com.videojs.providers{
           _hls.addEventListener(HLSEvent.SEEK_STATE,_seekStateHandler);
           _hls.addEventListener(HLSEvent.LEVEL_SWITCH,_levelSwitchHandler);
           _hls.addEventListener(HLSEvent.CAPTION_DATA, _onCaptionDataHandler);
+          _hls.addEventListener(HLSEvent.FRAGMENT_LOADED, _onFragmentLoaded);
+          _hls.addEventListener(HLSEvent.FRAGMENT_LOAD_EMERGENCY_ABORTED, _onFragmentAborted);
         }
 
         private function _completeHandler(event:HLSEvent):void {
@@ -91,6 +103,15 @@ package com.videojs.providers{
 
         private function _errorHandler(event:HLSEvent):void {
           Log.debug("error!!!!:"+ event.error.msg);
+
+          if (
+            event.error.code === HLSError.FRAGMENT_LOADING_ERROR ||
+            event.error.code === HLSError.FRAGMENT_PARSING_ERROR ||
+            event.error.code === HLSError.FRAGMENT_LOADING_CROSSDOMAIN_ERROR
+          ) {
+            _mediaRequestsErrored++;
+          }
+
           _model.broadcastErrorEventExternally(ExternalErrorEventName.SRC_404);
           _networkState = NetworkState.NETWORK_NO_SOURCE;
           _readyState = ReadyState.HAVE_NOTHING;
@@ -231,6 +252,27 @@ package com.videojs.providers{
           }
         }
 
+        private function _onFragmentLoaded(event:HLSEvent):void
+        {
+          var metrics = event.loadMetrics;
+          var fragmentTransferTime = metrics.parsing_end_time - metrics.loading_request_time;
+          _mediaRequests++;
+          _mediaSecondsLoaded = _mediaSecondsLoaded + metrics.duration / 1000;
+          _mediaBytesTransferred = _mediaBytesTransferred + metrics.size;
+          _mediaTransferDuration = _mediaTransferDuration + fragmentTransferTime;
+          _currentBandwidth = metrics.bandwidth;
+          Log.info("media request count" + _mediaRequests);
+          Log.info("media seconds loaded " + _mediaSecondsLoaded);
+          Log.info("media bytes loaded " + _mediaBytesTransferred);
+          Log.info("media bandwidth " + _currentBandwidth);
+
+        }
+
+        private function _onFragmentAborted(event:HLSEvent):void
+        {
+          _mediaRequestsAborted++;
+          Log.info("media request count" + _mediaRequestsAborted);
+        }
         public function get loop():Boolean{
             return _loop;
         }
@@ -381,7 +423,7 @@ package com.videojs.providers{
          * this value is unknown or unable to be calculated (due to streaming, bitrate switching, etc)
          */
         public function get bytesLoaded():int {
-          return 0;
+          return _mediaBytesTransferred;
         }
 
         /**
@@ -712,14 +754,27 @@ package com.videojs.providers{
 
         public function get videoPlaybackQuality():Object{
             if (_hls.stream != null &&
-                _hls.stream.hasOwnProperty('totalFrames') &&
-                _hls.stream.hasOwnProperty('droppedFrames')) {
+                _hls.stream.hasOwnProperty('decodedFrames') &&
+                _hls.stream.info.hasOwnProperty('droppedFrames')) {
                 return {
-                    droppedVideoFrames: _hls.stream.droppedFrames,
-                    totalVideoFrames: _hls.stream.totalFrames
+                    droppedVideoFrames: _hls.stream.info.droppedFrames,
+                    totalVideoFrames: _hls.stream.decodedFrames + _hls.stream.info.droppedFrames
                 };
             }
             return {};
+        }
+
+        public function get stats():Object {
+          return {
+            bandwidth: _currentBandwidth,
+            mediaRequests: _mediaRequests,
+            mediaRequestsAborted: _mediaRequestsAborted,
+            mediaRequestsTimedout: 0,
+            mediaRequestsErrored: _mediaRequestsErrored,
+            mediaTransferDuration: _mediaTransferDuration,
+            mediaBytesTransferred: _mediaBytesTransferred,
+            mediaSecondsLoaded: _mediaSecondsLoaded
+          }
         }
     }
 }
