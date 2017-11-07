@@ -252,27 +252,33 @@ package com.videojs.providers{
           }
         }
 
+        /**
+         * This is called whenever a segment is successfully loaded.
+         *
+         * Whenever a segment is loaded we keep metrics on a series of statistics, such as
+         * - how many segments have been requested
+         * - how many seconds of media have been downloaded
+         * - how many bytes have been transferred
+         * - how much times has been spent downloading segments
+         * - what the bandwidth was for the latest downloaded segment
+         */
         private function _onFragmentLoaded(event:HLSEvent):void
         {
           var metrics = event.loadMetrics;
           var fragmentTransferTime = metrics.parsing_end_time - metrics.loading_request_time;
+
           _mediaRequests++;
           _mediaSecondsLoaded = _mediaSecondsLoaded + metrics.duration / 1000;
           _mediaBytesTransferred = _mediaBytesTransferred + metrics.size;
           _mediaTransferDuration = _mediaTransferDuration + fragmentTransferTime;
           _currentBandwidth = metrics.bandwidth;
-          Log.info("media request count" + _mediaRequests);
-          Log.info("media seconds loaded " + _mediaSecondsLoaded);
-          Log.info("media bytes loaded " + _mediaBytesTransferred);
-          Log.info("media bandwidth " + _currentBandwidth);
-
         }
 
         private function _onFragmentAborted(event:HLSEvent):void
         {
           _mediaRequestsAborted++;
-          Log.info("media request count" + _mediaRequestsAborted);
         }
+
         public function get loop():Boolean{
             return _loop;
         }
@@ -754,11 +760,11 @@ package com.videojs.providers{
 
         public function get videoPlaybackQuality():Object{
             if (_hls.stream != null &&
-                _hls.stream.hasOwnProperty('decodedFrames') &&
-                _hls.stream.info.hasOwnProperty('droppedFrames')) {
+                _hls.stream.hasOwnProperty('totalFrames') &&
+                _hls.stream.hasOwnProperty('droppedFrames')) {
                 return {
-                    droppedVideoFrames: _hls.stream.info.droppedFrames,
-                    totalVideoFrames: _hls.stream.decodedFrames + _hls.stream.info.droppedFrames
+                    droppedVideoFrames: _hls.stream.droppedFrames,
+                    totalVideoFrames: _hls.stream.totalFrames
                 };
             }
             return {};

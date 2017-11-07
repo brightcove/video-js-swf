@@ -267,6 +267,9 @@ package com.videojs.providers{
           */
         function get altAudioTracks():Array;
 
+        /**
+         * Should return metrics that calculate COGS (cost of goods and services).
+         */
         function get stats():Object;
     }
 }
