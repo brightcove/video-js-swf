@@ -268,10 +268,22 @@ package com.videojs.providers{
           var fragmentTransferTime = metrics.parsing_end_time - metrics.loading_request_time;
 
           _mediaRequests++;
-          _mediaSecondsLoaded = _mediaSecondsLoaded + metrics.duration / 1000;
-          _mediaBytesTransferred = _mediaBytesTransferred + metrics.size;
-          _mediaTransferDuration = _mediaTransferDuration + fragmentTransferTime;
-          _currentBandwidth = metrics.bandwidth;
+
+          if (!isNaN(metrics.duration)) {
+            _mediaSecondsLoaded = _mediaSecondsLoaded + metrics.duration / 1000;
+          }
+
+          if (!isNaN(metrics.size)) {
+            _mediaBytesTransferred = _mediaBytesTransferred + metrics.size;
+          }
+
+          if (!isNaN(fragmentTransferTime)) {
+            _mediaTransferDuration = _mediaTransferDuration + fragmentTransferTime;
+          }
+
+          if (!isNaN(metrics.bandwidth)) {
+            _currentBandwidth = metrics.bandwidth;
+          }
         }
 
         private function _onFragmentAborted(event:HLSEvent):void
