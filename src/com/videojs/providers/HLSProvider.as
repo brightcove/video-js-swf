@@ -265,7 +265,6 @@ package com.videojs.providers{
         private function _onFragmentLoaded(event:HLSEvent):void
         {
           var metrics = event.loadMetrics;
-          var fragmentTransferTime = metrics.parsing_end_time - metrics.loading_request_time;
 
           _mediaRequests++;
 
@@ -277,8 +276,8 @@ package com.videojs.providers{
             _mediaBytesTransferred = _mediaBytesTransferred + metrics.size;
           }
 
-          if (!isNaN(fragmentTransferTime)) {
-            _mediaTransferDuration = _mediaTransferDuration + fragmentTransferTime;
+          if (!isNaN(metrics.processing_duration)) {
+            _mediaTransferDuration = _mediaTransferDuration + metrics.processing_duration;
           }
 
           if (!isNaN(metrics.bandwidth)) {
