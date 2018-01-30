@@ -2,9 +2,12 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-* Call play after manifest loaded if play was called before manifest was loaded
+_(none)_
 
 --------------------
+
+## 6.4.1 (2018-01-30)
+* Call play after manifest loaded if play was called before manifest was loaded
 
 ## 6.4.0 (2017-12-13)
 _(none)_
