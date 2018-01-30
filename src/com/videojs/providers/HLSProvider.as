@@ -46,6 +46,7 @@ package com.videojs.providers{
         private var _duration:Number = 0;
         private var _isAutoPlay:Boolean = false;
         private var _isManifestLoaded:Boolean = false;
+        private var _waitingOnManifest:Boolean = false;
         private var _isPlaying:Boolean = false;
         private var _isSeeking:Boolean = false;
         private var _isPaused:Boolean = true;
@@ -133,8 +134,9 @@ package com.videojs.providers{
           _duration = event.levels[0].duration;
           _metadata.width = event.levels[0].width;
           _metadata.height = event.levels[0].height;
-          if(_isAutoPlay || _looping) {
+          if(_isAutoPlay || _looping || _waitingOnManifest) {
             _looping = false;
+            _waitingOnManifest = false;
             play();
           }
           _model.broadcastEventExternally(ExternalEventName.ON_LOAD_START);
@@ -611,6 +613,8 @@ package com.videojs.providers{
               default:
                 break;
             }
+          } else {
+            _waitingOnManifest = true;
           }
         }
 
