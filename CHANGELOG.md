@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## HEAD (Unreleased)
-_(none)_
+* Call play after manifest loaded if play was called before manifest was loaded
 
 --------------------
 
