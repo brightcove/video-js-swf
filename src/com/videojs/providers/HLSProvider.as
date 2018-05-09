@@ -67,7 +67,7 @@ package com.videojs.providers{
         private var _mediaTransferDuration:Number = 0;
 
         public function HLSProvider() {
-          Log.info("https://github.com/brightcove/flashls");
+          Log.debug("https://github.com/brightcove/flashls");
           _hls = new HLS();
           _model = VideoJSModel.getInstance();
           _metadata = {};
