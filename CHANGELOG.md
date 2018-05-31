@@ -6,6 +6,9 @@ _(none)_
 
 --------------------
 
+## 6.4.2 (2018-05-31)
+_(none)_
+
 ## 6.4.1 (2018-01-30)
 * Call play after manifest loaded if play was called before manifest was loaded
 
