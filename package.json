@@ -37,6 +37,6 @@
     "version": "chg release -y && grunt dist && git add -f dist/ && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@brightcove/flashls": "1.2.1"
+    "@brightcove/flashls": "1.2.2"
   }
 }
