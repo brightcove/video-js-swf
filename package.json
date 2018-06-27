@@ -1,7 +1,7 @@
 {
   "name": "@brightcove/videojs-flashls-swf",
   "description": "The Flash-fallback video player for video.js (http://videojs.com)",
-  "version": "6.4.1",
+  "version": "6.4.2",
   "copyright": "Copyright 2014 Brightcove, Inc. https://github.com/videojs/video-js-swf/blob/master/LICENSE",
   "keywords": [
     "flash",
@@ -37,6 +37,6 @@
     "version": "chg release -y && grunt dist && git add -f dist/ && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@brightcove/flashls": "1.2.1"
+    "@brightcove/flashls": "1.2.2"
   }
 }
